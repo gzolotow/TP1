@@ -15,6 +15,9 @@ const CHIP_LABELS = ['NO', 'NOP', 'NEGADO'];
 let rainTimeoutId = null;
 let lastDropX = null;
 
+let counter = 0;
+const counterEl = document.getElementById("counter");
+
 const normalizePhrase = (value) => {
     const text = String(value || '').trim();
     if (!text) {
@@ -165,6 +168,8 @@ const loadPhrase = async () => {
     
     statusEl.textContent = getRandomWaitingMessage();
     setLoading(true);
+    counter++;
+counterEl.textContent = `Excusas pedidas: ${counter}`;
 
     try {
         const payload = await fetchNoAsAService();
