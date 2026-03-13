@@ -590,3 +590,29 @@ body.is-fetching::after {
 	}
 
 }
+.no-burst {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	font-weight: 800;
+	font-size: 1.2rem;
+	color: #ff6b6b;
+	pointer-events: none;
+	opacity: 0;
+	transform: translate(-50%, -50%) scale(0.3);
+	animation: noBurst 0.9s ease forwards;
+}
+
+@keyframes noBurst {
+	0% {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(0.3);
+	}
+	100% {
+		opacity: 0;
+		transform: translate(
+			calc(-50% + var(--x)),
+			calc(-50% + var(--y))
+		) scale(1.4);
+	}
+}
