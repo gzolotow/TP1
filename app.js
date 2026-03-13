@@ -113,27 +113,8 @@ const spawnNoChip = () => {
         chipEl.remove();
     }, lifeTimeMs + 250);
 };
-const burstNo = () => {
-	const total = 14;
 
-	for (let i = 0; i < total; i++) {
-		const el = document.createElement("span");
-		el.className = "no-burst";
-		el.textContent = "NO";
 
-		const x = (Math.random() - 0.5) * 300;
-		const y = (Math.random() - 0.5) * 300;
-
-		el.style.setProperty("--x", `${x}px`);
-		el.style.setProperty("--y", `${y}px`);
-
-		cardEl.appendChild(el);
-
-		setTimeout(() => {
-			el.remove();
-		}, 900);
-	}
-};
 const scheduleRain = () => {
     spawnNoChip();
     rainTimeoutId = window.setTimeout(scheduleRain, randomInRange(780, 1650));
@@ -161,7 +142,7 @@ const renderPhrase = ({ phrase, source }) => {
     fortuneShellEl.classList.remove('is-revealed');
     void fortuneShellEl.offsetWidth;
     fortuneShellEl.classList.add('is-revealed');
-    burstNo();
+    
 };
 
 const loadPhrase = async () => {
@@ -185,6 +166,15 @@ counterEl.textContent = `Excusas pedidas: ${counter}`;
     }
 };
 
-nextPhraseBtn.addEventListener('click', loadPhrase);
+nextPhraseBtn.addEventListener('click', () => {
+
+    // animación del círculo
+    fortuneShellEl.classList.remove('pulse');
+    void fortuneShellEl.offsetWidth; 
+    fortuneShellEl.classList.add('pulse');
+
+    // cargar excusa
+    loadPhrase();
+});
 startNoRain();
 loadPhrase();
